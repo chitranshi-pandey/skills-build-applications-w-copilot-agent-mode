@@ -26,12 +26,8 @@ SECRET_KEY = 'django-insecure-dqy#-m#ao_qig)%xgui6n@y%hc(6cn4-502c*)cd9n3oqm0622
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-if os.environ.get('CODESPACE_NAME'):
-    ALLOWED_HOSTS.append(f"{os.environ.get('CODESPACE_NAME')}-8000.app.github.dev")
+ALLOWED_HOSTS = ['*']
 
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,6 +46,12 @@ INSTALLED_APPS = [
     'teams',
     'workouts',
 ]
+
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,8 +93,8 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'octofit_db',
         'CLIENT': {
-            # Use a MongoDB URI to support auth/replica sets if needed
-            'host': 'mongodb://localhost:27017',
+            'host': 'mongodb://localhost:27017/octofit_db',
+            # No authentication or password required
         }
     }
 }
@@ -135,10 +137,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # CORS settings
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_METHODS = ['DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT']
 
 # REST Framework settings
 REST_FRAMEWORK = {

@@ -23,6 +23,7 @@ import os
 # Import ViewSets
 from users.views import UserViewSet, UserProfileViewSet
 from activities.views import ActivityViewSet
+from activities.leaderboard import LeaderboardAPIView
 from teams.views import TeamViewSet, TeamMemberViewSet
 from workouts.views import WorkoutPlanViewSet, WorkoutSessionViewSet
 
@@ -60,6 +61,8 @@ def api_root(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', api_root, name='api-root'),
+    path('', api_root, name='api-root'),
+    path('api/', api_root, name='api-root-alias'),
     path('api/', include(router.urls)),
+    path('api/leaderboard/', LeaderboardAPIView.as_view(), name='leaderboard'),
 ]
