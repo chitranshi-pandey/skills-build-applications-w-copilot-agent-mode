@@ -91,8 +91,8 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'octofit_db',
         'CLIENT': {
-            'host': 'localhost',
-            'port': 27017,
+            # Use a MongoDB URI to support auth/replica sets if needed
+            'host': 'mongodb://localhost:27017',
         }
     }
 }
